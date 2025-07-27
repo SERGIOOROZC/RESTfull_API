@@ -1,0 +1,79 @@
+parte 1
+
+1 descargo express
+2 en paquete type:module
+3 app.js creo el servidor
+4 instalo nodemon para actualizar comando --  npm run dev
+5 cambie el puerto error en xampp 3000
+6 instale sql2
+7 archivo db.js usando promesas
+8 hasta aca
+Eso significa que ya tenés:
+
+✅ Conexión establecida con MySQL.
+
+✅ Backend funcionando con Express.
+
+✅ Endpoints /ping-db y /usuarios devolviendo datos reales.
+
+✅ async/await implementado correctamente.
+
+parte 2
+ endpoint usuario , se importa a app.js
+ endpoint libros , se importa a app.js
+
+
+parte 3
+
+los endpoint restantes estan:
+
+prestamo.routes.js :
+    router.get('/usuario/:id_usuario', getPrestamosPorUsuario);  // GET /prestamos/usuario/:id_usuario
+    router.get('/libro/:id_libro', getPrestamosPorLibro);        // GET /prestamos/libro/:id_libro
+
+
+libro.routes.js : linea 9 y 21
+    
+
+****************************************************************************************************
+
+El servidor quedará corriendo en: http://localhost:3000
+
+📖 Endpoints disponibles
+Usuarios
+Método	    Ruta	                Descripción
+GET	/      usuarios             	Obtener todos los usuarios
+GET	/      usuarios/:id	            Obtener un usuario por id
+POST/      usuarios	                Crear un usuario
+PUT	/      usuarios/:id	            Actualizar usuario
+DELETE/    usuarios/:id	            Eliminar usuario
+
+Libros
+Método	     Ruta               	Descripción
+GET	/       libros	                Obtener todos los libros
+GET	/       libros/:id	            Obtener un libro por id
+POST/       libros	                Crear un nuevo libro
+PUT	/       libros/:id	            Actualizar datos de un libro
+PUT	/       libros/:id/existencia	Actualizar existencia de un libro
+DELETE/     libros/:id	            Eliminar un libro
+GET	/       libros/disponibles  	Libros con existencia > 0
+
+Préstamos
+Método	     Ruta         	        Descripción
+GET	/   prestamos	                Obtener todos los préstamos
+GET	/   prestamos/:id	            Obtener préstamo por id
+POST/   prestamos	                Crear un nuevo préstamo
+PUT	/   prestamos/:id	            Actualizar préstamo
+DELETE/ prestamos/:id	            Eliminar préstamo
+GET	/   prestamos/usuario/:id	    Préstamos por usuario
+GET	/   prestamos/libro/:id	        Préstamos por libro
+
+Reseñas
+Método	    Ruta	                Descripción
+GET	/    resenias	                Obtener todas las reseñas
+GET	/    resenias/:id	            Obtener reseña por id
+GET	/    resenias/libro/:id	        Reseñas de un libro específico
+POST/    resenias	                Crear una reseña
+PUT	/    resenias/:id	            Actualizar reseña
+DELETE/ resenias/:id	            Eliminar reseña
+

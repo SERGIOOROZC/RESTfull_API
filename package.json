@@ -1,0 +1,28 @@
+{
+  "name": "api_express",
+  "version": "1.0.0",
+  "description": "my firts api whith express",
+  "type": "module",
+  "main": "app.js",
+  "star": "node app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SERGIOOROZC/RESTfull_API.git"
+  },
+  "author": "Sergio Orozco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SERGIOOROZC/RESTfull_API/issues"
+  },
+  "homepage": "https://github.com/SERGIOOROZC/RESTfull_API#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
