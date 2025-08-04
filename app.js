@@ -1,16 +1,29 @@
 // app.js
-import express from 'express';
+
+/*/import express from 'express';
 import db from './db.js';
 import usuarioRoutes from './routes/usuario.routes.js';
 import libroRoutes from './routes/libro.routes.js';
 import prestamoRoutes from './routes/prestamo.routes.js';
 import reseniaRoutes from './routes/resenia.routes.js';
+*/
+
+//codigo actualizado importacion 
+// lo traigo/importo
+
+import express from 'express';
+import db from './src/config/db.js';
+import usuarioRoutes from './src/routes/usuario.routes.js';
+import libroRoutes from './src/routes/libro.routes.js';
+import prestamoRoutes from './src/routes/prestamo.routes.js';
+import reseniaRoutes from './src/routes/resenia.routes.js';
 
 
 
 const app = express();                // Primero declarás "app"
 const PORT = 3000;
 
+// lo uso
 app.use(express.json());              // Middleware para JSON
 
 app.use('/usuarios', usuarioRoutes);  // rutas

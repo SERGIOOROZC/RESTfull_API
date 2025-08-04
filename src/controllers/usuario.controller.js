@@ -1,4 +1,4 @@
-import db from '../db.js';
+import db from '../config/db.js';
 
 // GET /usuarios
 export const getUsuarios = async (req, res) => {

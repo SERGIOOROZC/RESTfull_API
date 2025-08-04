@@ -1,0 +1,18 @@
+Express router : organización lógica de las rutas dentro de express , archivos independientes.no son obligatorias crear todas.
+
+Raíz: source src 
+
+Config:  configuración a base de datos ( pool )
+Controllers: controladores que manejan la lógica de distintos entornos
+Midllewares: una carpeta aparte exclusiva para la función de autentificación, auditorias ,historial .
+Models: modelos que gestionan los datos desde la fuente para abastecer  a los controladores.
+Routes: rutas que derivan  el trafico  a los distintos controladores.
+Services: lógica adicional  para interactuar  con la base d datos 
+Utils:  ejemplo un errorHandler.js  - manejador de errores
+
+
+App.js  : punto de entrada
+Package.json
+En SVC descargar: material icon theme
+Carpeta crear src .
+

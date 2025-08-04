@@ -1,4 +1,6 @@
-import db from '../db.js';
+//import db from '../db.js';
+import db from '../config/db.js';
+
 
 // GET /resenias
 export const getResenias = async (req, res) => {
