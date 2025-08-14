@@ -1,5 +1,8 @@
-// db.js 
-import mysql from 'mysql2';
+// hay otra manera : import {createPool} from "mysql2"; esto trae solo la creacion de la conexion
+//                   const pool= mysql.createPool
+
+
+import mysql from 'mysql2'; // trae todo sql para hacer solo la conexion.
 
 const pool = mysql.createPool({
   host: 'localhost',

@@ -1,89 +1,79 @@
-//import db from '../db.js';
-import db from '../config/db.js';
-
+import {
+  obtenerPrestamos,
+  obtenerPrestamoPorId,
+  insertarPrestamo,
+  modificarPrestamo,
+  borrarPrestamo,
+  obtenerPrestamosPorUsuario,
+  obtenerPrestamosPorLibro
+} from '../model/prestamo.model.js';
 
 // GET /prestamos
 export const getPrestamos = async (req, res) => {
   try {
-    const [rows] = await db.query('SELECT * FROM prestamo');
-    res.json(rows);
-  } catch (error) {
+    res.json(await obtenerPrestamos());
+  } catch {
     res.status(500).json({ error: 'Error al obtener préstamos' });
   }
 };
 
 // GET /prestamos/:id
 export const getPrestamoPorId = async (req, res) => {
-  const { id } = req.params;
   try {
-    const [rows] = await db.query('SELECT * FROM prestamo WHERE id_prestamo = ?', [id]);
-    if (rows.length === 0) return res.status(404).json({ error: 'Préstamo no encontrado' });
-    res.json(rows[0]);
-  } catch (error) {
+    const prestamo = await obtenerPrestamoPorId(req.params.id);
+    if (prestamo.length === 0) return res.status(404).json({ error: 'Préstamo no encontrado' });
+    res.json(prestamo[0]);
+  } catch {
     res.status(500).json({ error: 'Error al obtener el préstamo' });
   }
 };
 
 // POST /prestamos
 export const crearPrestamo = async (req, res) => {
-  const { id_usuario, id_libro, fecha_prestamo, fecha_devolucion } = req.body;
   try {
-    const [result] = await db.query(
-      'INSERT INTO prestamo (id_usuario, id_libro, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?, ?)',
-      [id_usuario, id_libro, fecha_prestamo, fecha_devolucion]
-    );
-    res.status(201).json({ id_prestamo: result.insertId, id_usuario, id_libro, fecha_prestamo, fecha_devolucion });
-  } catch (error) {
+    const id = await insertarPrestamo(req.body);
+    res.status(201).json({ id_prestamo: id, ...req.body });
+  } catch {
     res.status(500).json({ error: 'Error al crear el préstamo' });
   }
 };
 
 // PUT /prestamos/:id
 export const actualizarPrestamo = async (req, res) => {
-  const { id } = req.params;
-  const { id_usuario, id_libro, fecha_prestamo, fecha_devolucion } = req.body;
   try {
-    const [result] = await db.query(
-      'UPDATE prestamo SET id_usuario = ?, id_libro = ?, fecha_prestamo = ?, fecha_devolucion = ? WHERE id_prestamo = ?',
-      [id_usuario, id_libro, fecha_prestamo, fecha_devolucion, id]
-    );
-    if (result.affectedRows === 0) return res.status(404).json({ error: 'Préstamo no encontrado' });
+    const updated = await modificarPrestamo(req.params.id, req.body);
+    if (!updated) return res.status(404).json({ error: 'Préstamo no encontrado' });
     res.json({ mensaje: 'Préstamo actualizado correctamente' });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Error al actualizar el préstamo' });
   }
 };
 
 // DELETE /prestamos/:id
 export const eliminarPrestamo = async (req, res) => {
-  const { id } = req.params;
   try {
-    const [result] = await db.query('DELETE FROM prestamo WHERE id_prestamo = ?', [id]);
-    if (result.affectedRows === 0) return res.status(404).json({ error: 'Préstamo no encontrado' });
+    const deleted = await borrarPrestamo(req.params.id);
+    if (!deleted) return res.status(404).json({ error: 'Préstamo no encontrado' });
     res.json({ mensaje: 'Préstamo eliminado correctamente' });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Error al eliminar el préstamo' });
   }
 };
 
 // GET /prestamos/usuario/:id_usuario
 export const getPrestamosPorUsuario = async (req, res) => {
-  const { id_usuario } = req.params;
   try {
-    const [rows] = await db.query('SELECT * FROM prestamo WHERE id_usuario = ?', [id_usuario]);
-    res.json(rows);
-  } catch (error) {
+    res.json(await obtenerPrestamosPorUsuario(req.params.id_usuario));
+  } catch {
     res.status(500).json({ error: 'Error al obtener préstamos por usuario' });
   }
 };
 
 // GET /prestamos/libro/:id_libro
 export const getPrestamosPorLibro = async (req, res) => {
-  const { id_libro } = req.params;
   try {
-    const [rows] = await db.query('SELECT * FROM prestamo WHERE id_libro = ?', [id_libro]);
-    res.json(rows);
-  } catch (error) {
+    res.json(await obtenerPrestamosPorLibro(req.params.id_libro));
+  } catch {
     res.status(500).json({ error: 'Error al obtener préstamos por libro' });
   }
 };

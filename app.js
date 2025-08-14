@@ -1,15 +1,7 @@
-// app.js
-
-/*/import express from 'express';
-import db from './db.js';
-import usuarioRoutes from './routes/usuario.routes.js';
-import libroRoutes from './routes/libro.routes.js';
-import prestamoRoutes from './routes/prestamo.routes.js';
-import reseniaRoutes from './routes/resenia.routes.js';
-*/
-
-//codigo actualizado importacion 
-// lo traigo/importo
+//importo modulos - app.js tiene la configuracion general
+// 1 express para crear el servidor
+// 2 db.js para la conexion a base de datos
+// 3 archivos de rutas - usuarioRoutes,libroRoutes,etc
 
 import express from 'express';
 import db from './src/config/db.js';
@@ -20,13 +12,16 @@ import reseniaRoutes from './src/routes/resenia.routes.js';
 
 
 
-const app = express();                // Primero declarás "app"
+const app = express();                // 4 Primero declarás "app" para inicializar el servidor.
 const PORT = 3000;
 
-// lo uso
-app.use(express.json());              // Middleware para JSON
+// lo uso - tipos de datos que puedo recibir
+app.use(express.json());                         // 5 Middleware para JSON permite recibir datos json en las peticiones
+app.use(express.text());                         // si llega peticion en texto plano
+app.use(express.urlencoded({extended:true}));    //datos en formato formulario html 
 
-app.use('/usuarios', usuarioRoutes);  // rutas
+// Le dice a Express: “Si llega una petición que empieza con /usuarios, envíala al router usuarioRoutes para que ahí busque la ruta exacta.”
+app.use('/usuarios', usuarioRoutes);  
 app.use('/libros', libroRoutes);
 app.use('/prestamos', prestamoRoutes);
 app.use('/resenias', reseniaRoutes);

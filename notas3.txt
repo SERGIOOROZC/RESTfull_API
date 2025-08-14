@@ -1,0 +1,49 @@
+Flujo típico explicado paso a paso
+
+El cliente hace una petición HTTP
+Por ejemplo, desde el navegador o Postman escribís:
+GET http://localhost:3000/libros/5
+Esto significa: “Quiero el libro con id 5”.
+
+El servidor recibe la petición en app.js
+
+app.js tiene la configuración general de la aplicación.
+
+Aquí usás app.use('/libros', libroRoutes) para decir que todo lo que empiece con /libros se maneja con las rutas definidas en libro.routes.js.
+
+La petición pasa a libro.routes.js
+
+Dentro de este archivo, el router detecta que es un GET a /:id (porque /libros/5 cumple eso).
+
+Entonces llama a la función getLibroPorId que está importada desde libro.controller.js.
+
+El controlador (libro.controller.js) maneja la lógica
+
+La función getLibroPorId recibe el id de la URL (en este caso, 5).
+
+Hace una consulta a la base de datos usando el objeto db para pedir el libro con id_libro = 5.
+
+Consulta a la base de datos
+
+El objeto db (definido en src/config/db.js) se conecta a MySQL y ejecuta la consulta SQL:
+SELECT * FROM libro WHERE id_libro = 5.
+
+Espera a que la base de datos le devuelva los datos.
+
+Respuesta de la base de datos
+
+Si encuentra el libro, devuelve la información (ejemplo: título, autor, editorial, año, existencia).
+
+Si no, devuelve un resultado vacío.
+
+El controlador prepara la respuesta HTTP
+
+Si encontró el libro, envía un JSON con los datos.
+
+Si no, envía un JSON con un mensaje de error y código 404 (Libro no encontrado).
+
+En caso de error interno, envía código 500 con mensaje de error.
+
+El servidor envía la respuesta al cliente
+
+El cliente recibe el JSON y puede mostrarlo en pantalla o usarlo para lo que quiera.
